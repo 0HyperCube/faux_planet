@@ -5,28 +5,45 @@ on:
       - 'main'
 
 jobs:
-  label_issue:
-    strategy:
-      matrix:
-        include:
-          - os: ubuntu-latest
-            artifact.name: Linux
-            artifact.path: bin/Debug-linux/FauxPlanet/FauxPlanet
-          - os: windows-latest
-            artifact.name: Windows
-            artifact.path: bin/Debug-linux/FauxPlanet/FauxPlanet.exe
-    runs-on: ${{ matrix.os }}
+  build-windows:
+    name: Build Windows
+    runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - uses: abel0b/setup-premake@v2.4
         with:
           version: "5.0.0-beta2"
-      - name: Generate make files
+      - name: Compile
+        run: |
+          premake5 gmake2
+          mkdir -p bin-int\\Debug-windows
+          mkdir -p bin\\Debug-windows
+          cmd.exe /C "make"
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows
+          path: bin/Debug-windows/FauxPlanet/FauxPlanet.exe
+  build-linux:
+    name: Build Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: abel0b/setup-premake@v2.4
+        with:
+          version: "5.0.0-beta2"
+      - name: Compile
         run: |
           premake5 gmake2
           make
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.artifact.name }}
-          path: ${{ matrix.artifact.path }}
+          name: Linux
+          path: bin/Debug-linux/FauxPlanet/FauxPlanet

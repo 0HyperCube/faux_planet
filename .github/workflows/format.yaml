@@ -10,10 +10,12 @@ jobs:
           - 'eng/include'
           - 'eng/src'
           - 'faux_planet/src'
+      fail-fast: false
     steps:
-    - uses: actions/checkout@v4
-    - name: Run clang-format style check for C/C++/Protobuf programs.
-      uses: jidicula/clang-format-action@v4
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Run clang-format style check.
+      uses: jidicula/clang-format-action@v4.13.0
       with:
         clang-format-version: '14'
         check-path: ${{ matrix.path }}
