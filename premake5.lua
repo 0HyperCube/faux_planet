@@ -15,12 +15,14 @@ workspace "FauxPlanet"
 
 
 
+
 project "FauxPlanet"
 	language "C++"
 	kind "ConsoleApp"
-	includedirs { "eng/include", "eng/vendor/spdlog/include" }
-	files { "faux_planet/include/**.h", "faux_planet/src/**.c", "faux_planet/src/**.cpp" }
+	includedirs { "eng/src", "eng/vendor/spdlog/include" }
+	files { "faux_planet/src/**.h", "faux_planet/src/**.c", "faux_planet/src/**.cpp" }
 	links { "Eng", "spdlog" }
+
 
 project "spdlog"
 	language "C++"
@@ -31,6 +33,8 @@ project "spdlog"
 project "Eng"
 	language "C++"
 	kind "StaticLib"
-	files { "eng/include/**.h", "eng/src/**.c", "eng/src/**.cpp" }
-	includedirs { "eng/include", "eng/vendor/spdlog/include" }
+	files { "eng/src/**.h", "eng/src/**.c", "eng/src/**.cpp" }
+	includedirs { "eng/src", "eng/vendor/spdlog/include" }
+	pchheader "engpch.h"
+	pchsource "eng/src/engpch.cpp"
 
