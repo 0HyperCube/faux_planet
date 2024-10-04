@@ -1,6 +1,7 @@
 #ifndef ENG_BASE_EVENT_GUARD
 #define ENG_BASE_EVENT_GUARD
 
+namespace Eng {
 enum EventType {
 	EventTypeMouseDown = 1 << 5,
 	EventTypeMouseUp,
@@ -27,4 +28,5 @@ public:
 private:
 	EventType m_EventType;
 };
+}
 #endif

@@ -1,5 +1,5 @@
 #include "base.h"
-
+namespace Eng {
 enum MouseButton {
 	MouseButtonPrimary = 1 << 0,
 	MouseButtonSecondary = 1 << 1,
@@ -19,15 +19,17 @@ private:
 	BaseEvent m_Base = GetBaseEvent();
 	MouseButton m_Button;
 };
+}
 
 template <>
-struct fmt::formatter<MouseDownEvent> : fmt::formatter<std::string> {
-	auto format(MouseDownEvent my, format_context& ctx) const -> decltype(ctx.out())
+struct fmt::formatter<Eng::MouseDownEvent> : fmt::formatter<std::string> {
+	auto format(Eng::MouseDownEvent my, format_context& ctx) const -> decltype(ctx.out())
 	{
 		return format_to(ctx.out(), "MouseDownEvent {{ button: {} }}", (int)my.GetButton());
 	}
 };
 
+namespace Eng {
 class MouseUpEvent {
 public:
 	static BaseEvent GetBaseEvent() { return BaseEvent(EventTypeMouseUp); }
@@ -41,15 +43,17 @@ private:
 	BaseEvent m_Base = GetBaseEvent();
 	MouseButton m_Button;
 };
+}
 
 template <>
-struct fmt::formatter<MouseUpEvent> : fmt::formatter<std::string> {
-	auto format(MouseUpEvent my, format_context& ctx) const -> decltype(ctx.out())
+struct fmt::formatter<Eng::MouseUpEvent> : fmt::formatter<std::string> {
+	auto format(Eng::MouseUpEvent my, format_context& ctx) const -> decltype(ctx.out())
 	{
 		return format_to(ctx.out(), "MouseUpEvent {{ button: {} }}", (int)my.GetButton());
 	}
 };
 
+namespace Eng {
 class MouseMoveEvent {
 public:
 	static BaseEvent GetBaseEvent() { return BaseEvent(EventTypeMouseMove); }
@@ -66,15 +70,17 @@ private:
 	double m_X;
 	double m_Y;
 };
+}
 
 template <>
-struct fmt::formatter<MouseMoveEvent> : fmt::formatter<std::string> {
-	auto format(MouseMoveEvent my, format_context& ctx) const -> decltype(ctx.out())
+struct fmt::formatter<Eng::MouseMoveEvent> : fmt::formatter<std::string> {
+	auto format(Eng::MouseMoveEvent my, format_context& ctx) const -> decltype(ctx.out())
 	{
 		return format_to(ctx.out(), "MouseMoveEvent {{ x: {}, y: {} }}", my.GetX(), my.GetY());
 	}
 };
 
+namespace Eng {
 class MouseScrollEvent {
 public:
 	static BaseEvent GetBaseEvent() { return BaseEvent(EventTypeMouseScroll); }
@@ -91,10 +97,10 @@ private:
 	double m_X;
 	double m_Y;
 };
-
+}
 template <>
-struct fmt::formatter<MouseScrollEvent> : fmt::formatter<std::string> {
-	auto format(MouseScrollEvent my, format_context& ctx) const -> decltype(ctx.out())
+struct fmt::formatter<Eng::MouseScrollEvent> : fmt::formatter<std::string> {
+	auto format(Eng::MouseScrollEvent my, format_context& ctx) const -> decltype(ctx.out())
 	{
 		return format_to(ctx.out(), "MouseScrollEvent {{ x: {}, y: {} }}", my.GetX(), my.GetY());
 	}

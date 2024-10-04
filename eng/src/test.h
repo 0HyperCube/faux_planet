@@ -1,3 +1,0 @@
-namespace Eng {
-void print();
-}
