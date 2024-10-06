@@ -4,3 +4,9 @@ obj/
 Makefile
 *.make
 .vscode/
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles/
+CPackConfig.cmake
+CPackSourceConfig.cmake
+*.a

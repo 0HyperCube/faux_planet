@@ -10,6 +10,7 @@ bool fn(Eng::KeyDownEvent& ev)
 Application::Application()
 {
 	Eng::init();
+	ENG_INFO("hieeu {}", 4);
 
 	m_Window = std::unique_ptr<Eng::WindowInterface>(Eng::GlfwWindow::Create(Eng::WindowInterface::WindowProperties()));
 	while (true) {

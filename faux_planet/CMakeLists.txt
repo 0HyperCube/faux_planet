@@ -1,0 +1,5 @@
+file(GLOB_RECURSE FAUX_PLANET_SOURCES "*.cpp")
+file(GLOB_RECURSE FAUX_PLANET_HEADERS "*.h")
+add_executable(FauxPlanet ${FAUX_PLANET_SOURCES} ${FAUX_PLANET_HEADERS})
+target_include_directories(FauxPlanet PRIVATE src ${CMAKE_SOURCE_DIR}/eng/src)
+target_link_libraries(FauxPlanet Eng)
