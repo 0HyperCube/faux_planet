@@ -1,12 +1,23 @@
+# editor
+.vscode/
+
+# general build artifacts
 bin/
+build/
 bin-int/
 obj/
+
+# make
 Makefile
 *.make
-.vscode/
+
+# cmake
 CMakeCache.txt
 cmake_install.cmake
 CMakeFiles/
-CPackConfig.cmake
-CPackSourceConfig.cmake
 *.a
+
+# Ninja
+build.ninja
+.ninja_deps
+.ninja_log

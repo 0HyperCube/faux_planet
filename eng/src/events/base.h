@@ -10,6 +10,8 @@ enum EventType {
 
 	EventTypeKeyDown = 1 << 6,
 	EventTypeKeyUp,
+
+	EventTypeWindowClose = 1 << 7,
 };
 
 enum EventCategory {

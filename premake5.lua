@@ -1,11 +1,12 @@
 workspace "FauxPlanet"
 	configurations { "Debug", "Release" }
 
-	targetdir "bin/%{cfg.buildcfg}-%{cfg.system}/%{prj.name}"
+	targetdir "bin/%{cfg.buildcfg}-%{cfg.system}"
 	objdir "bin-int/%{cfg.buildcfg}-%{cfg.system}/%{prj.name}"
 	defines { "SPDLOG_COMPILED_LIB" }
 	systemversion "latest"
 	staticruntime "On"
+	cppdialect "C++20"
 
 	filter "configurations:Debug"
 		defines { "DEBUG" }
@@ -19,6 +20,7 @@ include_things = {
 	"eng/src",
 	"eng/vendor/spdlog/include",
 	"eng/vendor/glfw/include",
+	"eng/vendor/glad/include",
 }
 
 project "FauxPlanet"
@@ -26,17 +28,26 @@ project "FauxPlanet"
 	kind "ConsoleApp"
 	includedirs(include_things)
 	files { "faux_planet/src/**.h", "faux_planet/src/**.c", "faux_planet/src/**.cpp" }
-	links { "Eng", "spdlog", "glfw", "GL" }
+	links { "Eng" }
 
 project "spdlog"
 	language "C++"
 	kind "StaticLib"
+	pic "On"
 	files { "eng/vendor/spdlog/include/**.h", "eng/vendor/spdlog/src/**.cpp" }
 	includedirs { "eng/vendor/spdlog/include" }
+
+project "glad"
+	language "C"
+	kind "StaticLib"
+	pic "On"
+	files { "eng/vendor/glad/**.c", "eng/vendor/glad/**.h" }
+	includedirs { "eng/vendor/glad/include" }
 
 project "glfw"
 	language "C"
 	kind "StaticLib"
+	pic "On"
 	function add (src, values)
 		for i, value in ipairs(values) do
 			files { path.join(src,value) }
@@ -92,9 +103,11 @@ rule "WaylandHeader"
 
 project "Eng"
 	language "C++"
-	kind "StaticLib"
+	pic "On"
+	kind "SharedLib"
 	files { "eng/src/**.h", "eng/src/**.c", "eng/src/**.cpp" }
 	includedirs(include_things)
 	pchheader "engpch.h"
 	pchsource "eng/src/engpch.cpp"
+	links { "spdlog", "glfw", "glad" }
 

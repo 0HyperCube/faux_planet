@@ -16,7 +16,17 @@ public:
 
 private:
 	struct WindowData {
-		EventCallback callback;
+		EventCallback Callback;
+		double MouseX;
+		double MouseY;
+
+		template <typename T>
+		void SendEvent(T event)
+		{
+			ENG_CORE_INFO("Dispatching {}", event);
+			ENG_CORE_ASSERT(Callback, "Callback should not be null");
+			Callback((BaseEvent&)event);
+		}
 	};
 
 	GLFWwindow* m_Window;
