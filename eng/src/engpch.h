@@ -25,6 +25,10 @@
 #include "spdlog/fmt/ostr.h"
 #include "spdlog/sinks/stdout_sinks.h"
 
+#include "imgui.h"
+
+#include "backends/imgui_impl_opengl3.h"
+
 #include <iostream>
 #include <ranges>
 #include <stdio.h>

@@ -90,6 +90,14 @@ void GlfwWindow::SetEventCallback(EventCallback callback)
 	m_Data.Callback = callback;
 }
 
+std::array<int, 2> GlfwWindow::GetSize() const
+{
+	int width = 0;
+	int height = 0;
+	glfwGetWindowSize(m_Window, &width, &height);
+	return { width, height };
+}
+
 GlfwWindow::~GlfwWindow()
 {
 	ENG_CORE_INFO("Destroying window");

@@ -1,3 +1,6 @@
+#ifndef ENG_EVENTS_GUARD
+#define ENG_EVENTS_GUARD
+
 #include "key_event.h"
 #include "mouse_event.h"
 #include "window_event.h"
@@ -17,6 +20,8 @@ namespace Eng {
 // 	Event& m_Event;
 // };
 
+struct Application;
+
 template <typename T>
 bool Dispatch(std::function<bool(T&)> fn, BaseEvent& event)
 {
@@ -25,3 +30,5 @@ bool Dispatch(std::function<bool(T&)> fn, BaseEvent& event)
 	return fn((T&)event);
 }
 }
+
+#endif

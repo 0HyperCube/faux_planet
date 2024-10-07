@@ -1,3 +1,6 @@
+#ifndef GLFW_WINDOW_GUARD
+#define GLFW_WINDOW_GUARD
+
 #include "engpch.h"
 #include "window_interface.h"
 
@@ -12,6 +15,7 @@ public:
 		glfwSwapBuffers(m_Window);
 		glfwPollEvents();
 	}
+	std::array<int, 2> GetSize() const override;
 	~GlfwWindow();
 
 private:
@@ -34,3 +38,5 @@ private:
 	static void ErrorCallback(int error, const char* description);
 };
 }
+
+#endif

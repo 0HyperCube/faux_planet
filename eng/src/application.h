@@ -1,3 +1,5 @@
+#ifndef ENG_APPLICATION_HEADER_GUARD
+#define ENG_APPLICATION_HEADER_GUARD
 
 #include "engpch.h"
 #include "events/events.h"
@@ -9,9 +11,14 @@ class Application {
 public:
 	Application();
 	void Render();
+	const Eng::WindowInterface* GetWindow() { return &*m_Window; }
+	Eng::LayerStack* GetLayers() { return &*m_Layers; }
 
 private:
-	virtual void OnEvent(BaseEvent& event) { }
+	void OnEvent(BaseEvent& event);
 	std::unique_ptr<Eng::WindowInterface> m_Window;
+	std::unique_ptr<LayerStack> m_Layers;
 };
 } // namespace Eng
+
+#endif

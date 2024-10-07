@@ -1,8 +1,13 @@
 #include "engpch.h"
 #include "events/base.h"
 
+#ifndef ENG_LAYER_GUARD
+#define ENG_LAYER_GUARD
+
 namespace Eng {
+struct Application;
 class Layer {
+
 public:
 	Layer(const char* debugName)
 		: m_DebugName(debugName)
@@ -10,8 +15,8 @@ public:
 	}
 	const char* GetDebugName() { return m_DebugName; }
 	virtual ~Layer() { }
-	virtual void OnUpdate() { }
-	virtual bool OnEvent(BaseEvent& event) { return false; }
+	virtual void OnUpdate(Application* application) { }
+	virtual bool OnEvent(Application* application, BaseEvent& event) { return false; }
 
 private:
 	const char* m_DebugName;
@@ -33,3 +38,4 @@ struct fmt::formatter<Eng::Layer*> : fmt::formatter<std::string> {
 		return format_to(ctx.out(), "Layer {{ DebugName: \"{}\" }}", my->GetDebugName());
 	}
 };
+#endif

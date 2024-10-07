@@ -21,6 +21,7 @@ include_things = {
 	"eng/vendor/spdlog/include",
 	"eng/vendor/glfw/include",
 	"eng/vendor/glad/include",
+	"eng/vendor/imgui",
 }
 
 project "FauxPlanet"
@@ -43,6 +44,21 @@ project "glad"
 	pic "On"
 	files { "eng/vendor/glad/**.c", "eng/vendor/glad/**.h" }
 	includedirs { "eng/vendor/glad/include" }
+
+project "imgui"
+	language "C++"
+	kind "StaticLib"
+	pic "On"
+	function add (src, values)
+		for i, value in ipairs(values) do
+			files { path.join(src,value) }
+		end
+	end
+	add("eng/vendor/imgui", {"imgui.cpp", "imgui_draw.cpp", "imgui_internal.h", "imgui_widgets.cpp", "imstb_textedit.h", "imconfig.h", "imgui_demo.cpp", "imgui.h", "imgui_tables.cpp", "imstb_rectpack.h", "imstb_truetype.h" })
+	add("eng/vendor/imgui/backends", {"imgui_impl_opengl3.cpp", "imgui_impl_opengl3.h"})
+
+	-- files { "eng/vendor/imgui/**.cpp", "eng/vendor/imgui/**.h" }
+	includedirs {"eng/vendor/imgui"}
 
 project "glfw"
 	language "C"
@@ -109,5 +125,5 @@ project "Eng"
 	includedirs(include_things)
 	pchheader "engpch.h"
 	pchsource "eng/src/engpch.cpp"
-	links { "spdlog", "glfw", "glad" }
+	links { "spdlog", "glfw", "glad", "imgui" }
 

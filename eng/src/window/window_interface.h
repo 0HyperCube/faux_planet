@@ -27,6 +27,10 @@ public:
 	using EventCallback = std::function<void(BaseEvent&)>;
 	virtual void SetEventCallback(EventCallback callback) { ENG_CORE_ASSERT(0, "Window should have SetEventCallback implemented"); }
 	virtual void Update() { ENG_CORE_ASSERT(0, "Window should have Update implemented"); }
+	virtual std::array<int, 2> GetSize() const
+	{
+		return { 0, 0 };
+	}
 	virtual ~WindowInterface() { }
 };
 }

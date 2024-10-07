@@ -1,3 +1,6 @@
+#ifndef ENG_LAYER_STACK_GUARD
+#define ENG_LAYER_STACK_GUARD
+
 #include "engpch.h"
 #include "layer.h"
 
@@ -21,6 +24,8 @@ private:
 	std::array<std::vector<Element>, 2> m_Layers = { std::vector<Element>(), std::vector<Element>() };
 };
 }
+
+#endif
 
 template <>
 struct fmt::formatter<Eng::LayerStack> : fmt::formatter<std::string> {
